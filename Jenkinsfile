@@ -8,8 +8,10 @@ pipeline {
       steps {
         git branch: 'main', url: 'https://github.com/Graztier/jenkins-example-docker.git'        
       } 
+    }
     stage('log') {
-        sh "git log -n 1"
+      steps {
+        sh '''git log -n 1'''
       }
     }
   }
