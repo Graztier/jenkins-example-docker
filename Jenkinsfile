@@ -4,11 +4,12 @@ pipeline {
     buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
   }
   stages {
-    stage('Hello') {
+    stage('git') {
       steps {
-        sh '''
-          java -version
-        '''
+        git branch: 'main', url: 'https://github.com/Graztier/jenkins-example-docker.git'        
+      } 
+    stage('log') {
+        sh "git log -n 1"
       }
     }
   }
