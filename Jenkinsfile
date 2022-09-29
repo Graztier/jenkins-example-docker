@@ -9,9 +9,11 @@ pipeline {
         git branch: 'main', url: 'https://github.com/Graztier/jenkins-example-docker.git'        
       } 
     }
-    stage('log') {
+    stage('scan') {
       steps {
-        sh '''git log -n 1'''
+        withSonarQubeEnv(installationName: 'sq1') {
+          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+        }
       }
     }
   }
